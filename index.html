@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>tse</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="tse">
+<meta property="og:url" content="http://yoursite.com/index.html">
+<meta property="og:site_name" content="tse">
+<meta property="og:locale" content="default">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="tse">
+  
+    <link rel="alternate" href="/atom.xml" title="tse" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">tse</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-javascript基础回顾--正则表达式" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/06/12/javascript基础回顾--正则表达式/" class="article-date">
+  <time datetime="2018-06-12T08:41:53.000Z" itemprop="datePublished">2018-06-12</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="javascript基础回顾–正则表达式"><a href="#javascript基础回顾–正则表达式" class="headerlink" title="javascript基础回顾–正则表达式"></a>javascript基础回顾–正则表达式</h2><p>语法</p>
+<p>常用：</p>
+<ul>
+<li>\d：代表任意一个数字，0~9的任意一个</li>
+<li>\w：任意一个字母或数字或下划线，也就是 A~Z,a~z,0~9,_ 中任意一个</li>
+<li>\s：包括空格、制表符、换页符等空白字符的其中任意一个</li>
+<li>.：小数点可以匹配除了换行符（\n）以外的任意一个字符（包括数字）</li>
+<li>\b:匹配这样的位置(字符和边界符之间的位置)：它的前一个字符和后一个字符不全\w,单词边界符可以是中文符号、英文符号、空格、制表符、回车符号，以及各种边界，比如单词在开头，单词在结尾。 比如：”end\b”可以匹配”weekend”，”weekend “, “weekend,”等</li>
+</ul>
+<p>以上写法，当其为大写时刚好相反</p>
+<ul>
+<li>\S：匹配所有非空白字符（”\s” 可匹配各个空白字符）</li>
+<li>\D：匹配所有的非数字字符</li>
+<li>\W：匹配所有的字母、数字、下划线以外的字符</li>
+<li>\B：\b相反，匹配字符和非边界符之间的位置,比如：”\Bee\B”可以匹配”weekend”</li>
+</ul>
+<p>特殊符号的含义：</p>
+<ul>
+<li>?：匹配表达式0次或者1次，相当于 {0,1}，比如：”a[cd]?”可以匹配 “a”,”ac”,”ad”</li>
+<li>+：表达式至少出现1次，相当于 {1,}，比如：”a+b”可以匹配 “ab”,”aab”,”aaab”</li>
+<li><em>：表达式不出现或出现任意次，相当于 {0,}，比如：”a</em>b”可以匹配 “b”,”aaaab”.</li>
+<li>^：与字符串开始的地方匹配，不匹配任何字符，比如：”^aaa”可以匹配”aaasdsd”，”\^a”可以匹配”^av”</li>
+<li>$：与字符串结束的地方匹配，不匹配任何字符，比如：”aaa$”可以匹配”sdsdaaa”</li>
+<li>|：左右两边表达式之间 “或” 关系，匹配左边或者右边，比如“Tom|Jack‘可以匹配到”hi,Tom, i am Jack”</li>
+</ul>
+<p>{}的用法</p>
+<p>一般放在被修饰的表达式的后面</p>
+<ul>
+<li>{n}：表达式重复n次，比如：”a{5}” 相当于 “aaaaa”</li>
+<li>{m,n}：表达式至少重复m次，最多重复n次，比如：”ba{1,3}”可以匹配 “ba”或”baa”或”baaa”</li>
+<li>{m,}：表达式至少重复m次，比如：”\w\d{2,}”可以匹配 “a12”,”_456”,”M12344”</li>
+</ul>
+<p>[]的用法</p>
+<p>使用方括号 [ ] 包含一系列字符，能够匹配其中任意一个字符。用   包含一系列字符，则能够匹配其中字符之外的任意一个字符。同样的道理，虽然可以匹配其中任意一个，但是只能是一个，不是多个。    </p>
+<p>例如：</p>
+<pre><code>[ab5@] ：匹配 &quot;a&quot; 或 &quot;b&quot; 或 &quot;5&quot; 或 &quot;@&quot;
+[^abc]：匹配 &quot;a&quot;,&quot;b&quot;,&quot;c&quot; 之外的任意一个字符
+[f-k]：匹配 &quot;f&quot;~&quot;k&quot; 之间的任意一个字母
+[^A-F0-3]：匹配 &quot;A&quot;~&quot;F&quot;,&quot;0&quot;~&quot;3&quot; 之外的任意一个字符
+</code></pre><p>()的用法</p>
+<p>括号的作用，其实三言两语就能说明白，括号提供了分组，便于我们引用它。</p>
+<ol>
+<li>分组和分支结构</li>
+</ol>
+<p>这二者是括号最直接的作用，也是最原始的功能。</p>
+<p>1.1 分组</p>
+<p>我们知道/a+/匹配连续出现的“a”，而要匹配连续出现的“ab”时，需要使用/(ab)+/。</p>
+<p>其中括号是提供分组功能，使量词“+”作用于“ab”这个整体，测试如下：</p>
+<pre><code>var regex = /(ab)+/g;
+var string = &quot;ababa abbb ababab&quot;;
+console.log( string.match(regex) ); // [&quot;abab&quot;, &quot;ab&quot;, &quot;ababab&quot;]
+</code></pre><p>1.2 分支结构</p>
+<p>而在多选分支结构(p1|p2)中，此处括号的作用也是不言而喻的，提供了子表达式的所有可能  </p>
+<p>比如，要匹配如下的字符串：</p>
+<pre><code>I love honglingbo
+I love bobojie
+</code></pre><p>可以使用正则：</p>
+<pre><code>var regex = /^I love (honglingbo|bobojie)$/;
+console.log( regex.test(&quot;I love honglingbo&quot;) ); // true
+console.log( regex.test(&quot;I love bobojie&quot;) ); // true
+</code></pre><p>如果去掉正则中的括号，即/^I love honglingbo|bobojie$/，匹配字符串是”I love JavaScript”和”Regular Expression”，当然这不是我们想要的。</p>
+<ol start="2">
+<li>引用分组</li>
+</ol>
+<p>是括号一个重要的作用，有了它，我们就可以进行数据提取，以及更强大的替换操作。</p>
+<p>而要使用它带来的好处，必须配合使用实际环境的API。</p>
+<p>以日期为例。假设格式是yyyy-mm-dd的，我们可以先写一个简单的正则：</p>
+<pre><code>var regex = /\d{4}-\d{2}-\d{2}/;
+</code></pre><p>然后再修改成括号版的：</p>
+<pre><code>var regex = /(\d{4})-(\d{2})-(\d{2})/;
+</code></pre><p>2.1 提取数据</p>
+<p>比如提取出年、月、日，可以这么做：</p>
+<pre><code>var regex = /(\d{4})-(\d{2})-(\d{2})/;
+var string = &quot;2017-06-12&quot;;
+console.log( string.match(regex) ); 
+// =&gt; [&quot;2017-06-12&quot;, &quot;2017&quot;, &quot;06&quot;, &quot;12&quot;, index: 0, input: &quot;2017-06-12&quot;]
+</code></pre><p>match返回的一个数组，第一个元素是整体匹配结果，然后是各个分组（括号里）匹配的内容，然后是匹配下标，最后是输入的文本。（注意：如果正则是否有修饰符g，match返回的数组格式是不一样的）。</p>
+<p>另外也可以使用正则对象的exec方法：</p>
+<pre><code>var regex = /(\d{4})-(\d{2})-(\d{2})/;
+var string = &quot;2017-06-12&quot;;
+console.log( regex.exec(string) ); 
+// =&gt; [&quot;2017-06-12&quot;, &quot;2017&quot;, &quot;06&quot;, &quot;12&quot;, index: 0, input: &quot;2017-06-12&quot;]
+</code></pre><p>同时，也可以使用构造函数的全局属性$1至$9来获取：</p>
+<pre><code>var regex = /(\d{4})-(\d{2})-(\d{2})/;
+var string = &quot;2017-06-12&quot;;
+
+console.log(RegExp.$1); // &quot;2017&quot;
+console.log(RegExp.$2); // &quot;06&quot;
+console.log(RegExp.$3); // &quot;12&quot;
+</code></pre><p>2.2 替换</p>
+<p>比如，想把yyyy-mm-dd格式，替换成mm/dd/yyyy怎么做？</p>
+<pre><code>var regex = /(\d{4})-(\d{2})-(\d{2})/;
+var string = &quot;2017-06-12&quot;;
+var result = string.replace(regex, &quot;$2/$3/$1&quot;);
+console.log(result); // &quot;06/12/2017&quot;
+</code></pre><p>其中replace中的，第二个参数里用$1、$2、$3指代相应的分组。等价于如下的形式：</p>
+<pre><code>var regex = /(\d{4})-(\d{2})-(\d{2})/;
+var string = &quot;2017-06-12&quot;;
+var result = string.replace(regex, function() {
+    return RegExp.$2 + &quot;/&quot; + RegExp.$3 + &quot;/&quot; + RegExp.$1;
+});
+console.log(result); // &quot;06/12/2017&quot;
+</code></pre><p>也等价于：</p>
+<pre><code>var regex = /(\d{4})-(\d{2})-(\d{2})/;
+var string = &quot;2017-06-12&quot;;
+var result = string.replace(regex, function(match, year, month, day) {
+    return month + &quot;/&quot; + day + &quot;/&quot; + year;
+});
+console.log(result); // &quot;06/12/2017&quot;
+</code></pre><ol start="3">
+<li>反向引用</li>
+</ol>
+<p>除了使用相应API来引用分组，也可以在正则本身里引用分组。但只能引用之前出现的分组，即反向引用。</p>
+<p>还是以日期为例。</p>
+<p>比如要写一个正则支持匹配如下三种格式：</p>
+<pre><code>2016-06-12
+2016/06/12
+2016.06.12
+</code></pre><p>最先可能想到的正则是:</p>
+<pre><code>var regex = /\d{4}(-|\/|\.)\d{2}(-|\/|\.)\d{2}/;
+var string1 = &quot;2017-06-12&quot;;
+var string2 = &quot;2017/06/12&quot;;
+var string3 = &quot;2017.06.12&quot;;
+var string4 = &quot;2016-06/12&quot;;
+console.log( regex.test(string1) ); // true
+console.log( regex.test(string2) ); // true
+console.log( regex.test(string3) ); // true
+console.log( regex.test(string4) ); // true
+</code></pre><p>其中/和.需要转义。虽然匹配了要求的情况，但也匹配”2016-06/12”这样的数据。</p>
+<p>假设我们想要求分割符前后一致怎么办？此时需要使用反向引用：</p>
+<pre><code>var regex = /\d{4}(-|\/|\.)\d{2}\1\d{2}/;
+var string1 = &quot;2017-06-12&quot;;
+var string2 = &quot;2017/06/12&quot;;
+var string3 = &quot;2017.06.12&quot;;
+var string4 = &quot;2016-06/12&quot;;
+console.log( regex.test(string1) ); // true
+console.log( regex.test(string2) ); // true
+console.log( regex.test(string3) ); // true
+console.log( regex.test(string4) ); // false
+</code></pre><p>注意里面的\1，表示的引用之前的那个分组(-|\/|.)。不管它匹配到什么（比如-），\1都匹配那个同样的具体某个字符。</p>
+<p>我们知道了\1的含义后，那么\2和\3的概念也就理解了，即分别指代第二个和第三个分组。</p>
+<p>看到这里，此时，恐怕你会有三个问题。</p>
+<p>括号嵌套怎么办？</p>
+<p>以左括号（开括号）为准。比如：</p>
+<pre><code>var regex = /^((\d)(\d(\d)))\1\2\3\4$/;
+var string = &quot;1231231233&quot;;
+console.log( regex.test(string) ); // true
+console.log( RegExp.$1 ); // 123
+console.log( RegExp.$2 ); // 1
+console.log( RegExp.$3 ); // 23
+console.log( RegExp.$4 ); // 3
+</code></pre><p>我们可以看看这个正则匹配模式：</p>
+<p>第一个字符是数字，比如说1，</p>
+<p>第二个字符是数字，比如说2，</p>
+<p>第三个字符是数字，比如说3，</p>
+<p>接下来的是\1，是第一个分组内容，那么看第一个开括号对应的分组是什么，是123，</p>
+<p>接下来的是\2，找到第2个开括号，对应的分组，匹配的内容是1，</p>
+<p>接下来的是\3，找到第3个开括号，对应的分组，匹配的内容是23，</p>
+<p>最后的是\4，找到第3个开括号，对应的分组，匹配的内容是3。</p>
+<p>这个问题，估计仔细看一下，就该明白了。</p>
+<p>3.2 \10表示什么呢？</p>
+<p>另外一个疑问可能是，即\10是表示第10个分组，还是\1和0呢？答案是前者，虽然一个正则里出现\10比较罕见。测试如下：</p>
+<pre><code>var regex = /(1)(2)(3)(4)(5)(6)(7)(8)(9)(#) \10+/;
+var string = &quot;123456789# ######&quot;
+console.log( regex.test(string) );
+</code></pre><p>3.3 引用不存在的分组会怎样？</p>
+<p>因为反向引用，是引用前面的分组，但我们在正则里引用了不存在的分组时，此时正则不会报错，只是匹配反向引用的字符本身。例如\2，就匹配”\2”。注意”\2”表示对2进行了转意。</p>
+<pre><code>var regex = /\1\2\3\4\5\6\7\8\9/;
+console.log( regex.test(&quot;\1\2\3\4\5\6\7\8\9&quot;) ); //true
+</code></pre><ol start="4">
+<li>非捕获分组</li>
+</ol>
+<p>之前文中出现的分组，都会捕获它们匹配到的数据，以便后续引用，因此也称他们是捕获型分组。</p>
+<p>如果只想要括号最原始的功能，但不会引用它，即，既不在API里引用，也不在正则里反向引用。此时可以使用非捕获分组(?:p)，例如本文第一个例子可以修改为：</p>
+<pre><code>var regex = /(?:ab)+/g;
+var string = &quot;ababa abbb ababab&quot;;
+console.log( string.match(regex) ); // [&quot;abab&quot;, &quot;ab&quot;, &quot;ababab&quot;]
+</code></pre><ol start="5">
+<li>相关案例</li>
+</ol>
+<p>至此括号的作用已经讲完了，总结一句话，就是提供了可供我们使用的分组，如何用就看我们的了。</p>
+<p>5.1 字符串trim方法模拟</p>
+<p>trim方法是去掉字符串的开头和结尾的空白符。有两种思路去做。</p>
+<p>第一种，匹配到开头和结尾的空白符，然后替换成空字符。如：</p>
+<pre><code>function trim(str) {
+    return str.replace(/^\s+|\s+$/g, &apos;&apos;);
+}
+console.log( trim(&quot;  foobar   &quot;) ); // &quot;foobar&quot;
+</code></pre><p>第二种，匹配整个字符串，然后用引用来提取出相应的数据：</p>
+<pre><code>function trim(str) {
+    return str.replace(/^\s*(.*?)\s*$/g, &quot;$1&quot;);
+}
+console.log( trim(&quot;  foobar   &quot;) ); // &quot;foobar&quot;
+</code></pre><p>这里使用了惰性匹配*?，不然也会匹配最后一个空格之前的所有空格的。</p>
+<p>当然，前者效率高。</p>
+<p>5.2 将每个单词的首字母转换为大写</p>
+<pre><code>function titleize(str) {
+    return str.toLowerCase().replace(/(?:^|\s)\w/g, function(c) {
+        return c.toUpperCase();
+    });
+}
+console.log( titleize(&apos;my name is epeli&apos;) ); // &quot;My Name Is Epeli&quot;
+</code></pre><p>思路是找到每个单词的首字母，当然这里不使用非捕获匹配也是可以的。</p>
+<p>5.3 驼峰化</p>
+<pre><code>function camelize(str) {
+    return str.replace(/[-_\s]+(.)?/g, function(match, c) {
+        return c ? c.toUpperCase() : &apos;&apos;;
+    });
+}
+console.log( camelize(&apos;-moz-transform&apos;) ); // MozTransform
+</code></pre><p>首字母不会转化为大写的。其中分组(.)表示首字母，单词的界定，前面的字符可以是多个连字符、下划线以及空白符。正则后面的?的目的，是为了应对str尾部的字符可能不是单词字符，比如str是’-moz-transform ‘。</p>
+<p>5.4 中划线化</p>
+<pre><code>unction dasherize(str) {
+    return str.replace(/([A-Z])/g, &apos;-$1&apos;).replace(/[-_\s]+/g, &apos;-&apos;).toLowerCase();
+}
+console.log( dasherize(&apos;MozTransform&apos;) ); // -moz-transform
+</code></pre><p>驼峰化的逆过程。</p>
+<p>5.5 html转义和反转义</p>
+<pre><code>// 将HTML特殊字符转换成等值的实体
+function escapeHTML(str) {
+    var escapeChars = {
+      &apos;¢&apos; : &apos;cent&apos;,
+      &apos;£&apos; : &apos;pound&apos;,
+      &apos;¥&apos; : &apos;yen&apos;,
+      &apos;€&apos;: &apos;euro&apos;,
+      &apos;©&apos; :&apos;copy&apos;,
+      &apos;®&apos; : &apos;reg&apos;,
+      &apos;&lt;&apos; : &apos;lt&apos;,
+      &apos;&gt;&apos; : &apos;gt&apos;,
+      &apos;&quot;&apos; : &apos;quot&apos;,
+      &apos;&amp;&apos; : &apos;amp&apos;,
+      &apos;\&apos;&apos; : &apos;#39&apos;
+    };
+    return str.replace(new RegExp(&apos;[&apos; + Object.keys(escapeChars).join(&apos;&apos;) +&apos;]&apos;, &apos;g&apos;), function(match) {
+        return &apos;&amp;&apos; + escapeChars[match] + &apos;;&apos;;
+    });
+}
+console.log( escapeHTML(&apos;&lt;div&gt;Blah blah blah&lt;/div&gt;&apos;) );
+// =&gt; &amp;lt;div&amp;gt;Blah blah blah&amp;lt;/div&amp;gt;
+</code></pre><p>其中使用了用构造函数生成的正则，然后替换相应的格式就行了，这个跟本文没多大关系。</p>
+<p>倒是它的逆过程，使用了括号，以便提供引用，也很简单，如下：</p>
+<pre><code>// 实体字符转换为等值的HTML。
+function unescapeHTML(str) {
+    var htmlEntities = {
+      nbsp: &apos; &apos;,
+      cent: &apos;¢&apos;,
+      pound: &apos;£&apos;,
+      yen: &apos;¥&apos;,
+      euro: &apos;€&apos;,
+      copy: &apos;©&apos;,
+      reg: &apos;®&apos;,
+      lt: &apos;&lt;&apos;,
+      gt: &apos;&gt;&apos;,
+      quot: &apos;&quot;&apos;,
+      amp: &apos;&amp;&apos;,
+      apos: &apos;\&apos;&apos;
+    };
+    return str.replace(/\&amp;([^;]+);/g, function(match, key) {
+        if (key in htmlEntities) {
+            return htmlEntities[key];
+        }
+        return match;
+    });
+}
+console.log( unescapeHTML(&apos;&amp;lt;div&amp;gt;Blah blah blah&amp;lt;/div&amp;gt;&apos;) );
+// =&gt; &lt;div&gt;Blah blah blah&lt;/div&gt;
+</code></pre><p>通过key获取相应的分组引用，然后作为对象的键。</p>
+<p>5.6 匹配成对标签</p>
+<p>要求匹配：</p>
+<pre><code>&lt;title&gt;regular expression&lt;/title&gt;
+
+&lt;p&gt;laoyao bye bye&lt;/p&gt;
+</code></pre><p>不匹配：</p>
+<pre><code>&lt;title&gt;wrong!&lt;/p&gt;
+</code></pre><p>匹配一个开标签，可以使用正则&lt;[^&gt;]+&gt;，</p>
+<p>匹配一个闭标签，可以使用&lt;\/[^&gt;]+&gt;，</p>
+<p>但是要求匹配成对标签，那就需要使用反向引用，如：</p>
+<pre><code>var regex = /&lt;([^&gt;]+)&gt;[\d\D]*&lt;\/\1&gt;/;
+var string1 = &quot;&lt;title&gt;regular expression&lt;/title&gt;&quot;;
+var string2 = &quot;&lt;p&gt;laoyao bye bye&lt;/p&gt;&quot;;
+var string3 = &quot;&lt;title&gt;wrong!&lt;/p&gt;&quot;;
+console.log( regex.test(string1) ); // true
+console.log( regex.test(string2) ); // true
+console.log( regex.test(string3) ); // false
+</code></pre><p>其中开标签&lt;[^&gt;]+&gt;改成&lt;([^&gt;]+)&gt;，使用括号的目的是为了后面使用反向引用，而提供分组。闭标签使用了反向引用，&lt;\/\1&gt;。</p>
+<p>另外[\d\D]的意思是，这个字符是数字或者不是数字，因此，也就是匹配任意字符的意思。</p>
+<p>正则表达式中(括号) [方括号] {大括号}的区别</p>
+<ul>
+<li>括号() ： 括号是多个匹配，它把括号内的当做一组来处理，限制一些多选的范围，比如上面的需求只能是com cn net结尾的用括号就是最好的选择。<br>括号能提取字符串，如(com|cn|net)就可以限制，只能是com或cn或net。<br>括号将括号里面的内容作为一组，这就是与[]不同的地方。</li>
+<li>方括号[]： 方括号是单个匹配，如[abc]他限制的不是abc连续出现，而是只能是其中一个，这样写那么规则就是找到这个位置时只能是a或是b或是c；<br>方括号是正则表达式中最常用的，常用的用法有：[a-zA-Z0-9]匹配所有英文字母和数字，a-zA-Z0-9匹配所有非英文字母和数字。</li>
+<li>大括号{}： 大括号的用法很简单，就是匹配次数，它需要和其他有意义的正则表达式一起使用。<br>比如[a-c]{2}意思就是匹配a-c之间的一个字母出现且只出现两次；<br>比如(com){1}意思就是com必须出现一次<br>比如\W{1,3}意思就是非字母数字最少出现一次最多出现3次。</li>
+</ul>
+<p>贪婪与非贪婪模式</p>
+<p>概述</p>
+<p>贪婪与非贪婪模式影响的是被量词修饰的子表达式的匹配行为，贪婪模式在整个表达式匹配成功的前提下，尽可能多的匹配，而非贪婪模式在整个表达式匹配成功的前提下，尽可能少的匹配。非贪婪模式只被部分NFA引擎所支持。 </p>
+<p>属于贪婪模式的量词，也叫做匹配优先量词，包括：  </p>
+<p>{m,n}、{m,}、?、*和+。    </p>
+<p>在一些使用NFA引擎的语言中，在匹配优先量词后加上“?”，即变成属于非贪婪模式的量词，也叫做忽略优先量词，包括：    </p>
+<p>{m,n}?、{m,}?、??、*?和+?。 </p>
+<p>从正则语法的角度来讲，被匹配优先量词修饰的子表达式使用的就是贪婪模式，如“(Expression)+”；被忽略优先量词修饰的子表达式使用的就是非贪婪模式，如“(Expression)+?”。 </p>
+<p>对于贪婪模式，各种文档的叫法基本一致，但是对于非贪婪模式，有的叫懒惰模式或惰性模式，有的叫勉强模式，其实叫什么无所谓，只要掌握原理和用法，能够运用自如也就是了。个人习惯使用贪婪与非贪婪的叫法</p>
+<p>这两种模式如下图所示：</p>
+<p>  贪婪        非贪婪        意　　义（X为表达式）<br>  X?        X??        匹配 X 零次或一次<br>  X<em>        X</em>?        匹配 X 零次或多次<br>  X+        X+?        匹配 X 一次或多次<br>  X{n,}     X{n,}?     匹配 X 至少 n 次<br>  X{n,m}    X{n,m}?    匹配 X 至少 n 次，但不多于 m 次</p>
+<p>看下一个例子，假定要分析的字符串是xfooxxxxxxfoo</p>
+<ul>
+<li>贪婪模式:<br>最大匹配方式。模式分为子模式p1(.*)和子模式p2(foo)两个部分. 其中p1中的量词匹配方式使用默认方式(贪婪型)。 匹配开始时,吃入所有字符xfooxxxxxx去匹配子模式p1。匹配成功,但这样以来就没有了字符串去匹配子模式p2。本轮匹配失败；第二轮：减少p1部分的匹配量，吐出最后一个字符, 把字符串分割成xfooxxxxxxfo和o两个子字符串s1和s2。 s1匹配p1, 但s2不匹配p2。本轮匹配失败；第三轮，再次减少p1部分匹配量，吐出两个字符, 字符串被分割成xfooxxxxxxfo和oo两部分。结果同上。第四轮，再次减少p1匹配量, 字符串分割成xfooxxxxxx和foo两个部分, 这次s1/s2分别和p1/p2匹配。停止尝试,返回匹配成功。<pre><code>var regex = /.*foo/;
+var string = &quot;xfooxxxxxxfoo&quot;;
+console.log( string.match(regex) ); //xfooxxxxxxfoo
+</code></pre></li>
+<li>非贪婪模式:<br>最小匹配方式。第一次尝试匹配, p1由于是0或任意次，因此被忽略，用字符串去匹配p2,失败；第二次，读入第一个字符x, 尝试和p1匹配, 匹配成功; 字符串剩余部分fooxxxxxxfoo中前三个字符和p2也是匹配的. 因此, 停止尝试, 返回匹配成功。在这种模式下，如果对剩余字符串继续去寻找和模式相匹配的子字符串，还会找到字符串末尾的另一个xfoo，而在贪婪模式下，由于第一次匹配成功的子串就已经是所有字符，因此不存在第二个匹配子串。<pre><code>var regex = /.*?foo/;
+var string = &quot;xfooxxxxxxfoo&quot;;
+console.log( string.match(regex) ); //xfoo
+</code></pre></li>
+</ul>
+<p>JavaScript RegExp 对象</p>
+<p>正则表达式是描述字符模式的对象。</p>
+<p>正则表达式用于对字符串模式匹配及检索替换，是对字符串执行模式匹配的强大工具。</p>
+<p>语法</p>
+<pre><code>var patt=new RegExp(pattern,modifiers);
+
+或者更简单的方式:
+
+var patt=/pattern/modifiers;
+</code></pre><ul>
+<li>pattern（模式） 描述了表达式的模式</li>
+<li>modifiers(修饰符) 用于指定全局匹配、区分大小写的匹配和多行匹配</li>
+</ul>
+<p>注意：当使用构造函数创造正则对象时，需要常规的字符转义规则（在前面加反斜杠 \）。比如，以下是等价的：</p>
+<pre><code>var re = new RegExp(&quot;\\w+&quot;);
+var re = /\w+/;
+</code></pre><p>例如：</p>
+<pre><code>var re = new RegExp(&quot;\\w+&quot;);
+re.test(&quot;abc&quot;);//true
+
+/\w+\.test(&quot;abc&quot;);//true
+</code></pre><p>修饰符  </p>
+<p>修饰符用于执行区分大小写和全局匹配:</p>
+<p>  修饰符     描述<br>  i       执行对大小写不敏感的匹配。<br>  g       执行全局匹配（查找所有匹配而非在找到第一个匹配后停止）。<br>  m       执行多行匹配。                     </p>
+<p>exec()</p>
+<p>exec() 方法用于检索字符串中的正则表达式的匹配。</p>
+<p>如果字符串中有匹配的值返回该匹配值，否则返回 null。</p>
+<p>语法：  </p>
+<p>RegExpObject.exec(string)</p>
+<p>例子:   </p>
+<pre><code>var str=&quot;Hello world!&quot;;
+//查找&quot;Hello&quot;
+var patt=/Hello/g;
+console.log(patt.exec(str)); //Hello
+</code></pre><p>test()</p>
+<p>test() 方法用于检测一个字符串是否匹配某个模式.</p>
+<p>如果字符串中有匹配的值返回 true ，否则返回 false。</p>
+<p>语法：  </p>
+<p>RegExpObject.test(string)</p>
+<p>例子:   </p>
+<pre><code>var str=&quot;Hello world!&quot;;
+//查找&quot;Hello&quot;
+var patt=/Hello/g;
+console.log(patt.test(str)); //true
+</code></pre><p>match()</p>
+<p>找到一个或多个正则表达式的匹配。</p>
+<p>语法：  </p>
+<p>string.match(regexp)</p>
+<p>例子:   </p>
+<pre><code>有修饰符g
+var str=&quot;The rain in SPAIN stays mainly in the plain&quot;; 
+console.log(str.match(/ain/g));//&quot;ain&quot;, &quot;ain&quot;, &quot;ain&quot;
+
+没有修饰符g
+var str=&quot;The rain in SPAIN stays mainly in the plain&quot;; 
+console.log(str.match(/ain/));//&quot;ain&quot;
+</code></pre><p>注意： match() 方法将检索字符串 String Object，以找到一个或多个与 regexp 匹配的文本。这个方法的行为在很大程度上有赖于 regexp 是否具有标志 g。如果 regexp 没有标志 g，那么 match() 方法就只能在 stringObject 中执行一次匹配。如果没有找到任何匹配的文本， match() 将返回 null。否则，它将返回一个数组，其中存放了与它找到的匹配文本有关的信息。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/06/12/javascript基础回顾--正则表达式/" data-id="cjibga5iz0000kv6rujqy1dll" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-vue+webpack环境搭建" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/06/12/vue+webpack环境搭建/" class="article-date">
+  <time datetime="2018-06-12T08:36:54.000Z" itemprop="datePublished">2018-06-12</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="vue2-webpack2-搭建项目"><a href="#vue2-webpack2-搭建项目" class="headerlink" title="vue2+webpack2 搭建项目"></a>vue2+webpack2 搭建项目</h1><p>背景：<br>不是vue入门也不是webpack入门，做过vue项目的基础上，独立搭建项目环境。</p>
+<hr>
+<ul>
+<li><h2 id="webpack2-：从webpack开始，熟悉webpack功能"><a href="#webpack2-：从webpack开始，熟悉webpack功能" class="headerlink" title="webpack2 ：从webpack开始，熟悉webpack功能"></a>webpack2 ：从webpack开始，熟悉webpack功能</h2></li>
+</ul>
+<p>使用准备：新建文件夹-如：test</p>
+<pre><code>终端中输入  npm init
+
+输入这个命令后，终端会问你一系列诸如项目名称，项目描述，作者等信息，如此，package.json文件已经就绪
+
+安装webpack：  npm install --save-dev webpack
+
+随之出现 node_modules 文件夹
+</code></pre><p>回到之前的空文件夹，并在里面创建两个文件夹，app文件夹和public文件夹。</p>
+<p>++app文件夹++用来存放原始数据和我们将写的JavaScript模块，</p>
+<p>++build++用来存放准备给浏览器读取的数据（包括使用webpack生成的打包后的js文件以及一个index.html文件）。</p>
+<p>在这里还需要创建三个文件，index.html文件放在build文件夹中，两个js文件（Greeter.js和main.js）放在app文件夹中。</p>
+<p>此时项目结构如下所示<br><img src="https://github.com/githubcandybabe/githubcandybabe.github.io/blob/master/images/vue1.jpeg?raw=true" alt="image"></p>
+<p>index.html文件只有最基础的html代码，它唯一的目的就是加载打包后的js文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=&quot;en&quot;&gt;</span><br><span class="line">  &lt;head&gt;</span><br><span class="line">    &lt;meta charset=&quot;utf-8&quot;&gt;</span><br><span class="line">    &lt;title&gt;test&lt;/title&gt;</span><br><span class="line">  &lt;/head&gt;</span><br><span class="line">  &lt;body&gt;</span><br><span class="line">    &lt;div id=&apos;app&apos;&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">    &lt;script src=&quot;index.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">  &lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+<p>main.js用来把hello模块返回的节点插入页面。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">//main.js</span><br><span class="line">var hello = require(&apos;./hello.js&apos;);</span><br><span class="line">document.getElementById(&apos;app&apos;).appendChild(hello());</span><br></pre></td></tr></table></figure>
+<p>hello.js只包括一个用来返回包含问候信息的html元素的函数。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">//hello.js</span><br><span class="line">module.exports = function() &#123;</span><br><span class="line">  var hello2 = document.createElement(&apos;div&apos;);</span><br><span class="line">  hello2.textContent = &quot;Hi there and you!&quot;;</span><br><span class="line">  return hello2;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="正式使用Webpack"><a href="#正式使用Webpack" class="headerlink" title="正式使用Webpack"></a>正式使用Webpack</h3><h4 id="使用命令启用webpack"><a href="#使用命令启用webpack" class="headerlink" title="使用命令启用webpack"></a>使用命令启用webpack</h4><p>webpack可以在终端中使用，其最基础的命令是</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">webpack &#123;entry file/入口文件&#125; &#123;destination for bundled file/存放index.js的地方&#125;</span><br></pre></td></tr></table></figure>
+<p>只需要指定一个入口文件，webpack将自动识别项目所依赖的其它文件，不过需要注意的是如果webpack没有进行全局安装，那么当你在终端中使用此命令时，需要额外指定其在node_modules中的地址，继续上面的例子，在终端中属于如下命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//webpack非全局安装的情况</span><br><span class="line">node_modules/.bin/webpack app/main.js build/index.js</span><br></pre></td></tr></table></figure>
+<p>结果如下<br><img src="https://github.com/githubcandybabe/githubcandybabe.github.io/blob/master/images/vue2.jpeg?raw=true" alt="image"></p>
+<p>webpack同时编译了main.js hello,js,现在打开index.html,可以看到如下结果</p>
+<p><img src="https://github.com/githubcandybabe/githubcandybabe.github.io/blob/master/images/vue3.jpeg?raw=true" alt="image"></p>
+<p>成功的使用Webpack打包了一个文件了。不过如果在终端中进行复杂的操作，还是不太方便且容易出错的，接下来看看Webpack的另一种使用方法。</p>
+<h4 id="通过配置文件来使用Webpack"><a href="#通过配置文件来使用Webpack" class="headerlink" title="通过配置文件来使用Webpack"></a>通过配置文件来使用Webpack</h4><p>Webpack拥有很多其它的比较高级的功能（比如loaders和plugins），这些功能其实都可以通过命令行模式实现。</p>
+<p>定义一个配置文件，这个配置文件其实也是一个简单的JavaScript模块，可以把所有的与构建相关的信息放在里面。</p>
+<p>还是继续上面的例子来说明如何写这个配置文件，在当前练习文件夹的根目录下新建一个名为webpack.config.js的文件，并在其中进行最最简单的配置，如下所示，它包含入口文件路径和存放打包后文件的地方的路径。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">module.exports = &#123;</span><br><span class="line">  entry:  __dirname + &quot;/app/main.js&quot;,//已多次提及的唯一入口文件</span><br><span class="line">  output: &#123;</span><br><span class="line">    path: __dirname + &quot;/build&quot;,//打包后的文件存放的地方</span><br><span class="line">    filename: &quot;index.js&quot;//打包后输出文件的文件名</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code>注：“__dirname”是node.js中的一个全局变量，它指向当前执行脚本所在的目录。
+</code></pre><p>现在如果你需要打包文件只需要在终端里你运行webpack(非全局安装需使用node_modules/.bin/webpack)命令就可以了，这条命令会自动参考webpack.config.js文件中的配置选项打包你的项目，输出结果如下</p>
+<p><img src="https://github.com/githubcandybabe/githubcandybabe.github.io/blob/master/images/vue4.jpeg?raw=true" alt="image"></p>
+<h4 id="更快捷的执行打包任务"><a href="#更快捷的执行打包任务" class="headerlink" title="更快捷的执行打包任务"></a>更快捷的执行打包任务</h4><p>npm可以引导任务执行，对其进行配置后可以使用简单的npm start命令来代替这些繁琐的命令。在package.json中对npm的脚本部分进行相关设置即可，设置方法如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;name&quot;: &quot;test&quot;,</span><br><span class="line">  &quot;version&quot;: &quot;1.0.0&quot;,</span><br><span class="line">  &quot;description&quot;: &quot;test&quot;,</span><br><span class="line">  &quot;scripts&quot;: &#123;</span><br><span class="line">    &quot;start&quot;: &quot;webpack&quot; //配置的地方就是这里啦，相当于把npm的start命令指向webpack命令</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;author&quot;: &quot;can&quot;,</span><br><span class="line">  &quot;license&quot;: &quot;ISC&quot;,</span><br><span class="line">  &quot;devDependencies&quot;: &#123;</span><br><span class="line">    &quot;webpack&quot;: &quot;^2.12.9&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>npm的start是一个特殊的脚本名称，它的特殊性表现在，在命令行中使用npm start就可以执行相关命令，如果对应的此脚本名称不是start，想要在命令行中运行时，需要这样用npm run {script name}如npm run build，以下是执行npm start后命令行的输出显示</p>
+<p><img src="https://github.com/githubcandybabe/githubcandybabe.github.io/blob/master/images/vue5.jpeg?raw=true" alt="image"></p>
+<h3 id="使用webpack构建本地服务器"><a href="#使用webpack构建本地服务器" class="headerlink" title="使用webpack构建本地服务器"></a>使用webpack构建本地服务器</h3><p>想要页面跑起来，服务器少不了。</p>
+<p>在webpack中进行配置之前需要单独安装它作为项目依赖</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --save-dev webpack-dev-server</span><br></pre></td></tr></table></figure>
+<p>devserver作为webpack配置选项中的一项，具有以下配置选项</p>
+<p><img src="https://github.com/githubcandybabe/githubcandybabe.github.io/blob/master/images/vue6.jpeg?raw=true" alt="image"></p>
+<p>继续把这些命令加到webpack的配置文件中，现在的配置文件如下所示</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">module.exports = &#123;</span><br><span class="line">  entry:  __dirname + &quot;/app/main.js&quot;,</span><br><span class="line">  output: &#123;</span><br><span class="line">    path: __dirname + &quot;/build&quot;,</span><br><span class="line">    filename: &quot;index.js&quot;</span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  devServer: &#123;</span><br><span class="line">    contentBase:&quot;./build&quot;,//本地服务器所加载的页面所在的目录</span><br><span class="line">    colors: true,//终端中输出结果为彩色</span><br><span class="line">    historyApiFallback: true,//不跳转</span><br><span class="line">    inline: true//实时刷新</span><br><span class="line">  &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>为了展示一下webpack-dev-server的功能，我们在此对webpack.config.js和package.json做了修改</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">//webpack.config.js</span><br><span class="line"></span><br><span class="line">var webpack = require(&apos;webpack&apos;);</span><br><span class="line">var webpackDevServer = require(&apos;webpack-dev-server&apos;);</span><br><span class="line"></span><br><span class="line">module.exports = &#123;</span><br><span class="line">  entry:  __dirname + &quot;/app/main.js&quot;,</span><br><span class="line">  output: &#123;</span><br><span class="line">    path: __dirname + &quot;/build&quot;,</span><br><span class="line">    filename: &quot;index.js&quot;</span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  devServer: &#123;</span><br><span class="line">    contentBase:&quot;./build&quot;,//本地服务器所加载的页面所在的目录</span><br><span class="line">    historyApiFallback: true,//不跳转</span><br><span class="line">    inline: true//实时刷新</span><br><span class="line">  &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">//package.json</span><br><span class="line">&#123;</span><br><span class="line">  &quot;name&quot;: &quot;test&quot;,</span><br><span class="line">  &quot;version&quot;: &quot;1.0.0&quot;,</span><br><span class="line">  &quot;description&quot;: &quot;test&quot;,</span><br><span class="line">  &quot;scripts&quot;: &#123;</span><br><span class="line">    &quot;start&quot;: &quot;webpack&quot; //配置的地方就是这里啦，相当于把npm的start命令指向webpack命令</span><br><span class="line">    &quot;dev&quot; : &quot;webpack-dev-server --inline --hot&quot;</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;author&quot;: &quot;can&quot;,</span><br><span class="line">  &quot;license&quot;: &quot;ISC&quot;,</span><br><span class="line">  &quot;devDependencies&quot;: &#123;</span><br><span class="line">    &quot;webpack&quot;: &quot;^2.12.9&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>终端中输入 npm run dev</p>
+<p>浏览器中打开 localhost:8080/index.html</p>
+<p><img src="https://github.com/githubcandybabe/githubcandybabe.github.io/blob/master/images/vue7.jpeg?raw=true" alt="image"></p>
+<h3 id="HtmlWebpackPlugin"><a href="#HtmlWebpackPlugin" class="headerlink" title="HtmlWebpackPlugin"></a>HtmlWebpackPlugin</h3><p>这个插件的作用是依据一个简单的模板，帮你生成最终的Html5文件，这个文件中自动引用了你打包后的JS文件。每次编译都在文件名中插入一个不同的哈希值。</p>
+<p>安装<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --save-dev html-webpack-plugin</span><br></pre></td></tr></table></figure></p>
+<p>这个插件自动完成了我们之前手动做的一些事情，在正式使用之前需要对一直以来的项目结构做一些改变：</p>
+<ul>
+<li><p>移除build文件夹中index.html至app目录，利用此插件，HTML5文件会自动生成。</p>
+</li>
+<li><p>在app目录下，修改index.html，模板源代码如下</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=&quot;en&quot;&gt;</span><br><span class="line">  &lt;head&gt;</span><br><span class="line">    &lt;meta charset=&quot;utf-8&quot;&gt;</span><br><span class="line">    &lt;title&gt;test&lt;/title&gt;</span><br><span class="line">  &lt;/head&gt;</span><br><span class="line">  &lt;body&gt;</span><br><span class="line">    &lt;div id=&apos;app&apos;&gt;</span><br><span class="line">        test！</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">  &lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+<p>在webpack.config.js中进行配置：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">//头部引入html-webpack-plugin</span><br><span class="line">var HtmlWebpackPlugin = require(&quot;html-webpack-plugin&quot;);</span><br><span class="line"></span><br><span class="line">plugins: [</span><br><span class="line">		new HtmlWebpackPlugin(&#123;</span><br><span class="line">			template: &apos;./app/index.html&apos;</span><br><span class="line">		&#125;)</span><br><span class="line">	]</span><br></pre></td></tr></table></figure>
+<p>在终端输入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm run dev</span><br></pre></td></tr></table></figure>
+<p>浏览器中可看到如图<br><img src="https://github.com/githubcandybabe/githubcandybabe.github.io/blob/master/images/vue8.jpeg?raw=true" alt="image"></p>
+<h3 id="webpack的loaders"><a href="#webpack的loaders" class="headerlink" title="webpack的loaders"></a>webpack的loaders</h3><p>通过使用不同的loader，webpack通过调用外部的脚本或工具可以对各种各样的格式的文件进行处理</p>
+<p>Loaders需要单独安装（此处示范json的loader）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --save-dev json-loader</span><br></pre></td></tr></table></figure>
+<p>安装后在webpack.config.js下的modules关键字下进行配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">module: &#123;//在配置文件里添加JSON loader</span><br><span class="line">    loaders: [</span><br><span class="line">      &#123;</span><br><span class="line">        test: /\.json$/,</span><br><span class="line">        loader: &quot;json-loader&quot;</span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;,</span><br></pre></td></tr></table></figure>
+<p>Loaders的配置选项包括以下几方面：</p>
+<ul>
+<li>test：一个匹配loaders所处理的文件的拓展名的正则表达式（必须）</li>
+<li>loader：loader的名称（必须）<br>–++webpack2中loader不能简写++，已入过坑</li>
+<li>include/exclude:手动添加必须处理的文件（文件夹）或屏蔽不需要处理的文件（文件夹）（可选）；</li>
+<li>query：为loaders提供额外的设置选项（可选）</li>
+</ul>
+<p>loaders 需要用到再装，用什么装什么！</p>
+<h3 id="Babel"><a href="#Babel" class="headerlink" title="Babel"></a>Babel</h3><p>Babel是一个编译JavaScript的平台，它的强大之处表现在可以通过编译帮你达到以下目的：</p>
+<ul>
+<li>下一代的JavaScript标准（ES6，ES7），这些标准目前并未被当前的浏览器完全的支持；</li>
+<li>使用基于JavaScript进行了拓展的语言，比如React的JSX</li>
+</ul>
+<p>Babel其实是几个模块化的包，其核心功能位于称为babel-core的npm包中，不过webpack把它们整合在一起使用，但是对于每一个你需要的功能或拓展，你都需要安装单独的包。</p>
+<p>因为后续会用到es6语法，所以在此先安装依赖</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// npm一次性安装多个依赖模块，模块之间用空格隔开</span><br><span class="line">npm install --save-dev babel-core babel-loader babel-preset-es2015</span><br></pre></td></tr></table></figure>
+<p>在webpack.config.js中配置babel方法如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">module.exports = &#123;</span><br><span class="line">  entry:  __dirname + &quot;/app/main.js&quot;,</span><br><span class="line">  output: &#123;</span><br><span class="line">    path: __dirname + &quot;/build&quot;,</span><br><span class="line">    filename: &quot;index.js&quot;</span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  module: &#123;</span><br><span class="line">    loaders: [</span><br><span class="line">      &#123;</span><br><span class="line">        test: /\.json$/,</span><br><span class="line">        loader: &quot;json-loader&quot;</span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        test: /\.js$/,</span><br><span class="line">        exclude: /node_modules/,</span><br><span class="line">        loader: &apos;babel&apos;//在webpack的module部分的loaders里进行配置即可</span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;,</span><br><span class="line">  devServer: &#123;</span><br><span class="line">    contentBase: &quot;./build&quot;,</span><br><span class="line">    colors: true,</span><br><span class="line">    historyApiFallback: true,</span><br><span class="line">    inline: true</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="实现单vue页面在webpack上的搭建"><a href="#实现单vue页面在webpack上的搭建" class="headerlink" title="实现单vue页面在webpack上的搭建"></a>实现单vue页面在webpack上的搭建</h2><p>将vue在webpack的基础上使用，安装简单常用的loaders</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm i vue --save-dev</span><br><span class="line">npm i vue-loader --save-dev</span><br></pre></td></tr></table></figure>
+<p>安装vue-loader， 买一送二，顺带把css-loader与vue-template-compiler也安装上。如图：</p>
+<p><img src="https://github.com/githubcandybabe/githubcandybabe.github.io/blob/master/images/vue9.jpeg?raw=true" alt="image"></p>
+<p>在app文件夹中新建多个文件夹，用来支撑vue开发，如图：<img src="https://github.com/githubcandybabe/githubcandybabe.github.io/blob/master/images/vue10.jpeg?raw=true" alt="image"></p>
+<ul>
+<li>components文件夹，存放公用组件。新建app.vue,作为第一次启动的主程序模块。</li>
+<li>service文件夹，后端服务目录（node+mock存放）</li>
+<li>views文件夹，用来存放页面模块</li>
+<li>index.js,启动前的加载，注入，实例化(build中index.js移出来)</li>
+</ul>
+<p>此时build文件夹作用改变为存放最终的输出文件，为空文件夹。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">//app.vue</span><br><span class="line">&lt;template&gt;</span><br><span class="line">	&lt;div id=&quot;container&quot; class=&quot;clearfix&quot;&gt;</span><br><span class="line">		test！！！</span><br><span class="line">	&lt;/div&gt;</span><br><span class="line"></span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">	export default &#123;</span><br><span class="line">        data () &#123;</span><br><span class="line">            return &#123;</span><br><span class="line">                msg: &apos;Hello World!&apos;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">//index.js</span><br><span class="line">&apos;use strict&apos;;</span><br><span class="line">import Vue from &apos;vue&apos;;</span><br><span class="line">//入口文件配置</span><br><span class="line">import App from &apos;./components/app.vue&apos;;</span><br><span class="line">new Vue(&#123;</span><br><span class="line">	render: h =&gt; h(App),</span><br><span class="line">&#125;).$mount(&apos;#app&apos;);</span><br></pre></td></tr></table></figure>
+<p>在终端中输入 npm run dev</p>
+<p>浏览器如图显示：<br><img src="https://github.com/githubcandybabe/githubcandybabe.github.io/blob/master/images/vue11.jpeg?raw=true" alt="image"></p>
+<h2 id="vue-router2"><a href="#vue-router2" class="headerlink" title="vue-router2"></a>vue-router2</h2><p>vue－router作用请参照官网！</p>
+<p>在文件夹中新建router.js,用于配置路由。如图：<br><img src="https://github.com/githubcandybabe/githubcandybabe.github.io/blob/master/images/vue12.jpeg?raw=true" alt="image"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">//router.js</span><br><span class="line">import Vue from &apos;vue&apos;;</span><br><span class="line">import VueRouter from &apos;vue-router&apos;;</span><br><span class="line">import Test from &apos;../views/add/index.vue&apos;;</span><br><span class="line"></span><br><span class="line">Vue.use(VueRouter);</span><br><span class="line">//路由配置从方法调用，变成了对象传递</span><br><span class="line">//vue-router2中，不支持map的使用</span><br><span class="line">const routes = [</span><br><span class="line">	&#123;</span><br><span class="line">		path: &apos;/test&apos;,</span><br><span class="line">		component: Test</span><br><span class="line">	&#125;</span><br><span class="line">];</span><br><span class="line">const router = new VueRouter(&#123;</span><br><span class="line">	routes</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">export default router;</span><br></pre></td></tr></table></figure>
+<p>views文件夹中建add模块，再建index.vue用于调试。如图：<br><img src="https://github.com/githubcandybabe/githubcandybabe.github.io/blob/master/images/vue13.jpeg?raw=true" alt="image"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">//add-index.vue</span><br><span class="line">&lt;template&gt;</span><br><span class="line">	&lt;div&gt;</span><br><span class="line">		&lt;span id=&apos;test&apos;&gt;aaa&lt;/span&gt;</span><br><span class="line">		&lt;div&gt;aaaaaaabbbbbb&lt;/div&gt;</span><br><span class="line">	&lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">	export default &#123;</span><br><span class="line">        data () &#123;</span><br><span class="line">            return &#123;</span><br><span class="line">                msg: &apos;Hello World!&apos;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<p>修改app.vue，加入<router-view></router-view></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">//修改后对app.vue</span><br><span class="line">&lt;template&gt;</span><br><span class="line">	&lt;div id=&quot;container&quot; class=&quot;clearfix&quot;&gt;</span><br><span class="line">		test</span><br><span class="line">        &lt;router-view&gt;&lt;/router-view&gt;</span><br><span class="line">	&lt;/div&gt;</span><br><span class="line"></span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">	export default &#123;</span><br><span class="line">        data () &#123;</span><br><span class="line">            return &#123;</span><br><span class="line">                msg: &apos;Hello World!&apos;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<p>修改index.js</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&apos;use strict&apos;;</span><br><span class="line">import Vue from &apos;vue&apos;;</span><br><span class="line"></span><br><span class="line">//入口文件配置</span><br><span class="line">import App from &apos;./components/app.vue&apos;;</span><br><span class="line">//路由表配置</span><br><span class="line">import router from &apos;./router/router.js&apos;;</span><br><span class="line"></span><br><span class="line">new Vue(&#123;</span><br><span class="line">	render: h =&gt; h(App),</span><br><span class="line">	router</span><br><span class="line">&#125;).$mount(&apos;#app&apos;);</span><br></pre></td></tr></table></figure>
+<p>终端中输入：npm run dev</p>
+<p>在浏览器中输入：<a href="http://localhost:8080/#/test" target="_blank" rel="noopener">http://localhost:8080/#/test</a></p>
+<p>可以进入test模块，如图：</p>
+<p><img src="https://github.com/githubcandybabe/githubcandybabe.github.io/blob/master/images/vue14.jpeg?raw=true" alt="image"></p>
+<p>简单的环境就搭建完毕，可以开始开发！</p>
+<hr>
+<h1 id="未完待续"><a href="#未完待续" class="headerlink" title="未完待续"></a>未完待续</h1><h3 id="element-ui"><a href="#element-ui" class="headerlink" title="element.ui"></a>element.ui</h3><p>我回来了，因为没设计资源，自己把界面也要撸出来。</p>
+<p>所以玩了一下<a href="http://element.eleme.io/#/zh-CN/component/installation" target="_blank" rel="noopener">element.ui</a></p>
+<p>终端中输入 npm i element-ui –save-dev</p>
+<p>修改index.js </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">//	引入UI样式,各模块按需引入ui组件</span><br><span class="line">import &apos;element-ui/lib/theme-default/index.css&apos;;</span><br><span class="line">// 引入ui组件</span><br><span class="line">import ElementUI from &apos;element-ui&apos;;</span><br><span class="line">Vue.use(ElementUI);</span><br></pre></td></tr></table></figure>
+<p>然后页面中可以直接调用组件库了～记得看看什么loader漏了～</p>
+<p>附上package.json和webpack.config.js、index.js</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">//package.json</span><br><span class="line">&#123;</span><br><span class="line">  &quot;name&quot;: &quot;test&quot;,</span><br><span class="line">  &quot;version&quot;: &quot;1.0.0&quot;,</span><br><span class="line">  &quot;description&quot;: &quot;test&quot;,</span><br><span class="line">  &quot;main&quot;: &quot;index.js&quot;,</span><br><span class="line">  &quot;scripts&quot;: &#123;</span><br><span class="line">    &quot;start&quot;: &quot;webpack&quot;,</span><br><span class="line">    &quot;dev&quot;: &quot;webpack-dev-server --inline --hot&quot;</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;keywords&quot;: [</span><br><span class="line">    &quot;test&quot;</span><br><span class="line">  ],</span><br><span class="line">  &quot;author&quot;: &quot;xiezhihui&quot;,</span><br><span class="line">  &quot;license&quot;: &quot;ISC&quot;,</span><br><span class="line">  &quot;devDependencies&quot;: &#123;</span><br><span class="line">    &quot;axios&quot;: &quot;^0.15.3&quot;,</span><br><span class="line">    &quot;babel-core&quot;: &quot;^6.24.0&quot;,</span><br><span class="line">    &quot;babel-loader&quot;: &quot;^6.4.0&quot;,</span><br><span class="line">    &quot;babel-plugin-component&quot;: &quot;^0.9.1&quot;,</span><br><span class="line">    &quot;babel-plugin-transform-runtime&quot;: &quot;^6.23.0&quot;,</span><br><span class="line">    &quot;babel-preset-es2015&quot;: &quot;^6.24.0&quot;,</span><br><span class="line">    &quot;babel-preset-stage-2&quot;: &quot;^6.22.0&quot;,</span><br><span class="line">    &quot;css-loader&quot;: &quot;^0.27.2&quot;,</span><br><span class="line">    &quot;element-ui&quot;: &quot;^1.2.4&quot;,</span><br><span class="line">    &quot;file-loader&quot;: &quot;^0.10.1&quot;,</span><br><span class="line">    &quot;html-webpack-plugin&quot;: &quot;^2.28.0&quot;,</span><br><span class="line">    &quot;style-loader&quot;: &quot;^0.14.0&quot;,</span><br><span class="line">    &quot;vue&quot;: &quot;^2.2.2&quot;,</span><br><span class="line">    &quot;vue-html-loader&quot;: &quot;^1.2.4&quot;,</span><br><span class="line">    &quot;vue-loader&quot;: &quot;^11.1.4&quot;,</span><br><span class="line">    &quot;vue-router&quot;: &quot;^2.3.0&quot;,</span><br><span class="line">    &quot;vue-template-compiler&quot;: &quot;^2.2.2&quot;,</span><br><span class="line">    &quot;webpack&quot;: &quot;^2.2.1&quot;,</span><br><span class="line">    &quot;webpack-dev-server&quot;: &quot;^2.4.1&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">//webpack.config.js</span><br><span class="line">var WebpackDevServer = require(&quot;webpack-dev-server&quot;);</span><br><span class="line">var webpack = require(&quot;webpack&quot;);</span><br><span class="line">var HtmlWebpackPlugin = require(&quot;html-webpack-plugin&quot;);</span><br><span class="line"></span><br><span class="line">module.exports = &#123;</span><br><span class="line">	entry:  __dirname + &quot;/app/index.js&quot;,//已多次提及的唯一入口文件</span><br><span class="line">	output: &#123;</span><br><span class="line">		path: __dirname + &quot;/build&quot;,//打包后的文件存放的地方</span><br><span class="line">		filename: &quot;index.js&quot;//打包后输出文件的文件名</span><br><span class="line">	&#125;,</span><br><span class="line">	devServer: &#123;</span><br><span class="line">		contentBase: &quot;./build&quot;,//本地服务器所加载的页面所在的目录</span><br><span class="line">		historyApiFallback: true,//不跳转</span><br><span class="line">		inline: true//实时刷新</span><br><span class="line">	&#125;,</span><br><span class="line">	module: &#123;//在配置文件里添加JSON loader</span><br><span class="line">	    loaders: [</span><br><span class="line">			&#123;</span><br><span class="line">				test: /\.json$/,</span><br><span class="line">				loader: &quot;json-loader&quot;</span><br><span class="line">			&#125;,</span><br><span class="line">			&#123;</span><br><span class="line">				test: /\.vue$/, </span><br><span class="line">				loader:&quot;vue-loader&quot;, </span><br><span class="line">			&#125;,</span><br><span class="line">			&#123;</span><br><span class="line">				test: /\.js$/, </span><br><span class="line">				loader: &quot;babel-loader&quot;,</span><br><span class="line">				exclude: /node_modules/</span><br><span class="line">			&#125;,</span><br><span class="line">			&#123;</span><br><span class="line">				test: /\.css$/,</span><br><span class="line">				loader:&quot;style-loader!css-loader&quot;</span><br><span class="line">			&#125;,</span><br><span class="line">			&#123;</span><br><span class="line">				test: /\.(eot|svg|ttf|woff|woff2)(\?\S*)?$/,</span><br><span class="line">				loader: &quot;file-loader&quot;</span><br><span class="line">			&#125;,</span><br><span class="line">			&#123;</span><br><span class="line">				test: /\.(png|jpe?g|gif|svg)(\?\S*)?$/,</span><br><span class="line">				loader:&quot;file-loader&quot;</span><br><span class="line">			&#125;</span><br><span class="line">		]</span><br><span class="line">	&#125;,</span><br><span class="line">	plugins: [</span><br><span class="line">		new HtmlWebpackPlugin(&#123;</span><br><span class="line">			template: &apos;./app/index.html&apos;</span><br><span class="line">		&#125;)</span><br><span class="line">	]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">//index.js</span><br><span class="line">&apos;use strict&apos;;</span><br><span class="line">import Vue from &apos;vue&apos;;</span><br><span class="line"></span><br><span class="line">//入口文件配置</span><br><span class="line">import App from &apos;./components/app.vue&apos;;</span><br><span class="line">//路由表配置</span><br><span class="line">import router from &apos;./router/router.js&apos;;</span><br><span class="line"></span><br><span class="line">//	引入UI样式,各模块按需引入ui组件</span><br><span class="line">import &apos;element-ui/lib/theme-default/index.css&apos;;</span><br><span class="line">// 引入ui组件</span><br><span class="line">import ElementUI from &apos;element-ui&apos;;</span><br><span class="line">Vue.use(ElementUI);</span><br><span class="line"></span><br><span class="line">new Vue(&#123;</span><br><span class="line">	render: h =&gt; h(App),</span><br><span class="line">	router</span><br><span class="line">&#125;).$mount(&apos;#app&apos;);</span><br></pre></td></tr></table></figure>
+<hr>
+<h1 id="未完待续2"><a href="#未完待续2" class="headerlink" title="未完待续2"></a>未完待续2</h1>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/06/12/vue+webpack环境搭建/" data-id="cjibga5j50001kv6rywg4wn8e" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/06/12/javascript基础回顾--正则表达式/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2018/06/12/vue+webpack环境搭建/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 Candytse<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
