@@ -1,0 +1,1029 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="javascript基础回顾–正则表达式语法 常用：  \d：代表任意一个数字，0~9的任意一个 \w：任意一个字母或数字或下划线，也就是 A~Z,a~z,0~9,_ 中任意一个 \s：包括空格、制表符、换页符等空白字符的其中任意一个 .：小数点可以匹配除了换行符（\n）以外的任意一个字符（包括数字） \b:匹配这样的位置(字符和边界符之间的位置)：它的前一个字符和后一个字符不全\w,单词边界符可">
+<meta property="og:type" content="article">
+<meta property="og:title" content="javascript基础回顾--正则表达式">
+<meta property="og:url" content="http://yoursite.com/2018/03/08/javascript基础回顾--正则表达式/index.html">
+<meta property="og:site_name" content="tse">
+<meta property="og:description" content="javascript基础回顾–正则表达式语法 常用：  \d：代表任意一个数字，0~9的任意一个 \w：任意一个字母或数字或下划线，也就是 A~Z,a~z,0~9,_ 中任意一个 \s：包括空格、制表符、换页符等空白字符的其中任意一个 .：小数点可以匹配除了换行符（\n）以外的任意一个字符（包括数字） \b:匹配这样的位置(字符和边界符之间的位置)：它的前一个字符和后一个字符不全\w,单词边界符可">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-06-13T07:13:10.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="javascript基础回顾--正则表达式">
+<meta name="twitter:description" content="javascript基础回顾–正则表达式语法 常用：  \d：代表任意一个数字，0~9的任意一个 \w：任意一个字母或数字或下划线，也就是 A~Z,a~z,0~9,_ 中任意一个 \s：包括空格、制表符、换页符等空白字符的其中任意一个 .：小数点可以匹配除了换行符（\n）以外的任意一个字符（包括数字） \b:匹配这样的位置(字符和边界符之间的位置)：它的前一个字符和后一个字符不全\w,单词边界符可">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/03/08/javascript基础回顾--正则表达式/"/>
+
+
+
+
+
+  <title>javascript基础回顾--正则表达式 | tse</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">tse</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/08/javascript基础回顾--正则表达式/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Candytse">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="tse">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">javascript基础回顾--正则表达式</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-08T14:37:21+08:00">
+                2018-03-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="javascript基础回顾–正则表达式"><a href="#javascript基础回顾–正则表达式" class="headerlink" title="javascript基础回顾–正则表达式"></a>javascript基础回顾–正则表达式</h2><p>语法</p>
+<p>常用：</p>
+<ul>
+<li>\d：代表任意一个数字，0~9的任意一个</li>
+<li>\w：任意一个字母或数字或下划线，也就是 A~Z,a~z,0~9,_ 中任意一个</li>
+<li>\s：包括空格、制表符、换页符等空白字符的其中任意一个</li>
+<li>.：小数点可以匹配除了换行符（\n）以外的任意一个字符（包括数字）</li>
+<li>\b:匹配这样的位置(字符和边界符之间的位置)：它的前一个字符和后一个字符不全\w,单词边界符可以是中文符号、英文符号、空格、制表符、回车符号，以及各种边界，比如单词在开头，单词在结尾。 比如：”end\b”可以匹配”weekend”，”weekend “, “weekend,”等</li>
+</ul>
+<p>以上写法，当其为大写时刚好相反</p>
+<ul>
+<li>\S：匹配所有非空白字符（”\s” 可匹配各个空白字符）</li>
+<li>\D：匹配所有的非数字字符</li>
+<li>\W：匹配所有的字母、数字、下划线以外的字符</li>
+<li>\B：\b相反，匹配字符和非边界符之间的位置,比如：”\Bee\B”可以匹配”weekend”</li>
+</ul>
+<p>特殊符号的含义：</p>
+<ul>
+<li>?：匹配表达式0次或者1次，相当于 {0,1}，比如：”a[cd]?”可以匹配 “a”,”ac”,”ad”</li>
+<li>+：表达式至少出现1次，相当于 {1,}，比如：”a+b”可以匹配 “ab”,”aab”,”aaab”</li>
+<li><em>：表达式不出现或出现任意次，相当于 {0,}，比如：”a</em>b”可以匹配 “b”,”aaaab”.</li>
+<li>^：与字符串开始的地方匹配，不匹配任何字符，比如：”^aaa”可以匹配”aaasdsd”，”\^a”可以匹配”^av”</li>
+<li>$：与字符串结束的地方匹配，不匹配任何字符，比如：”aaa$”可以匹配”sdsdaaa”</li>
+<li>|：左右两边表达式之间 “或” 关系，匹配左边或者右边，比如“Tom|Jack‘可以匹配到”hi,Tom, i am Jack”</li>
+</ul>
+<p>{}的用法</p>
+<p>一般放在被修饰的表达式的后面</p>
+<ul>
+<li>{n}：表达式重复n次，比如：”a{5}” 相当于 “aaaaa”</li>
+<li>{m,n}：表达式至少重复m次，最多重复n次，比如：”ba{1,3}”可以匹配 “ba”或”baa”或”baaa”</li>
+<li>{m,}：表达式至少重复m次，比如：”\w\d{2,}”可以匹配 “a12”,”_456”,”M12344”</li>
+</ul>
+<p>[]的用法</p>
+<p>使用方括号 [ ] 包含一系列字符，能够匹配其中任意一个字符。用   包含一系列字符，则能够匹配其中字符之外的任意一个字符。同样的道理，虽然可以匹配其中任意一个，但是只能是一个，不是多个。    </p>
+<p>例如：</p>
+<pre><code>[ab5@] ：匹配 &quot;a&quot; 或 &quot;b&quot; 或 &quot;5&quot; 或 &quot;@&quot;
+[^abc]：匹配 &quot;a&quot;,&quot;b&quot;,&quot;c&quot; 之外的任意一个字符
+[f-k]：匹配 &quot;f&quot;~&quot;k&quot; 之间的任意一个字母
+[^A-F0-3]：匹配 &quot;A&quot;~&quot;F&quot;,&quot;0&quot;~&quot;3&quot; 之外的任意一个字符
+</code></pre><p>()的用法</p>
+<p>括号的作用，其实三言两语就能说明白，括号提供了分组，便于我们引用它。</p>
+<ol>
+<li>分组和分支结构</li>
+</ol>
+<p>这二者是括号最直接的作用，也是最原始的功能。</p>
+<p>1.1 分组</p>
+<p>我们知道/a+/匹配连续出现的“a”，而要匹配连续出现的“ab”时，需要使用/(ab)+/。</p>
+<p>其中括号是提供分组功能，使量词“+”作用于“ab”这个整体，测试如下：</p>
+<pre><code>var regex = /(ab)+/g;
+var string = &quot;ababa abbb ababab&quot;;
+console.log( string.match(regex) ); // [&quot;abab&quot;, &quot;ab&quot;, &quot;ababab&quot;]
+</code></pre><p>1.2 分支结构</p>
+<p>而在多选分支结构(p1|p2)中，此处括号的作用也是不言而喻的，提供了子表达式的所有可能  </p>
+<p>比如，要匹配如下的字符串：</p>
+<pre><code>I love honglingbo
+I love bobojie
+</code></pre><p>可以使用正则：</p>
+<pre><code>var regex = /^I love (honglingbo|bobojie)$/;
+console.log( regex.test(&quot;I love honglingbo&quot;) ); // true
+console.log( regex.test(&quot;I love bobojie&quot;) ); // true
+</code></pre><p>如果去掉正则中的括号，即/^I love honglingbo|bobojie$/，匹配字符串是”I love JavaScript”和”Regular Expression”，当然这不是我们想要的。</p>
+<ol start="2">
+<li>引用分组</li>
+</ol>
+<p>是括号一个重要的作用，有了它，我们就可以进行数据提取，以及更强大的替换操作。</p>
+<p>而要使用它带来的好处，必须配合使用实际环境的API。</p>
+<p>以日期为例。假设格式是yyyy-mm-dd的，我们可以先写一个简单的正则：</p>
+<pre><code>var regex = /\d{4}-\d{2}-\d{2}/;
+</code></pre><p>然后再修改成括号版的：</p>
+<pre><code>var regex = /(\d{4})-(\d{2})-(\d{2})/;
+</code></pre><p>2.1 提取数据</p>
+<p>比如提取出年、月、日，可以这么做：</p>
+<pre><code>var regex = /(\d{4})-(\d{2})-(\d{2})/;
+var string = &quot;2017-06-12&quot;;
+console.log( string.match(regex) ); 
+// =&gt; [&quot;2017-06-12&quot;, &quot;2017&quot;, &quot;06&quot;, &quot;12&quot;, index: 0, input: &quot;2017-06-12&quot;]
+</code></pre><p>match返回的一个数组，第一个元素是整体匹配结果，然后是各个分组（括号里）匹配的内容，然后是匹配下标，最后是输入的文本。（注意：如果正则是否有修饰符g，match返回的数组格式是不一样的）。</p>
+<p>另外也可以使用正则对象的exec方法：</p>
+<pre><code>var regex = /(\d{4})-(\d{2})-(\d{2})/;
+var string = &quot;2017-06-12&quot;;
+console.log( regex.exec(string) ); 
+// =&gt; [&quot;2017-06-12&quot;, &quot;2017&quot;, &quot;06&quot;, &quot;12&quot;, index: 0, input: &quot;2017-06-12&quot;]
+</code></pre><p>同时，也可以使用构造函数的全局属性$1至$9来获取：</p>
+<pre><code>var regex = /(\d{4})-(\d{2})-(\d{2})/;
+var string = &quot;2017-06-12&quot;;
+
+console.log(RegExp.$1); // &quot;2017&quot;
+console.log(RegExp.$2); // &quot;06&quot;
+console.log(RegExp.$3); // &quot;12&quot;
+</code></pre><p>2.2 替换</p>
+<p>比如，想把yyyy-mm-dd格式，替换成mm/dd/yyyy怎么做？</p>
+<pre><code>var regex = /(\d{4})-(\d{2})-(\d{2})/;
+var string = &quot;2017-06-12&quot;;
+var result = string.replace(regex, &quot;$2/$3/$1&quot;);
+console.log(result); // &quot;06/12/2017&quot;
+</code></pre><p>其中replace中的，第二个参数里用$1、$2、$3指代相应的分组。等价于如下的形式：</p>
+<pre><code>var regex = /(\d{4})-(\d{2})-(\d{2})/;
+var string = &quot;2017-06-12&quot;;
+var result = string.replace(regex, function() {
+    return RegExp.$2 + &quot;/&quot; + RegExp.$3 + &quot;/&quot; + RegExp.$1;
+});
+console.log(result); // &quot;06/12/2017&quot;
+</code></pre><p>也等价于：</p>
+<pre><code>var regex = /(\d{4})-(\d{2})-(\d{2})/;
+var string = &quot;2017-06-12&quot;;
+var result = string.replace(regex, function(match, year, month, day) {
+    return month + &quot;/&quot; + day + &quot;/&quot; + year;
+});
+console.log(result); // &quot;06/12/2017&quot;
+</code></pre><ol start="3">
+<li>反向引用</li>
+</ol>
+<p>除了使用相应API来引用分组，也可以在正则本身里引用分组。但只能引用之前出现的分组，即反向引用。</p>
+<p>还是以日期为例。</p>
+<p>比如要写一个正则支持匹配如下三种格式：</p>
+<pre><code>2016-06-12
+2016/06/12
+2016.06.12
+</code></pre><p>最先可能想到的正则是:</p>
+<pre><code>var regex = /\d{4}(-|\/|\.)\d{2}(-|\/|\.)\d{2}/;
+var string1 = &quot;2017-06-12&quot;;
+var string2 = &quot;2017/06/12&quot;;
+var string3 = &quot;2017.06.12&quot;;
+var string4 = &quot;2016-06/12&quot;;
+console.log( regex.test(string1) ); // true
+console.log( regex.test(string2) ); // true
+console.log( regex.test(string3) ); // true
+console.log( regex.test(string4) ); // true
+</code></pre><p>其中/和.需要转义。虽然匹配了要求的情况，但也匹配”2016-06/12”这样的数据。</p>
+<p>假设我们想要求分割符前后一致怎么办？此时需要使用反向引用：</p>
+<pre><code>var regex = /\d{4}(-|\/|\.)\d{2}\1\d{2}/;
+var string1 = &quot;2017-06-12&quot;;
+var string2 = &quot;2017/06/12&quot;;
+var string3 = &quot;2017.06.12&quot;;
+var string4 = &quot;2016-06/12&quot;;
+console.log( regex.test(string1) ); // true
+console.log( regex.test(string2) ); // true
+console.log( regex.test(string3) ); // true
+console.log( regex.test(string4) ); // false
+</code></pre><p>注意里面的\1，表示的引用之前的那个分组(-|\/|.)。不管它匹配到什么（比如-），\1都匹配那个同样的具体某个字符。</p>
+<p>我们知道了\1的含义后，那么\2和\3的概念也就理解了，即分别指代第二个和第三个分组。</p>
+<p>看到这里，此时，恐怕你会有三个问题。</p>
+<p>括号嵌套怎么办？</p>
+<p>以左括号（开括号）为准。比如：</p>
+<pre><code>var regex = /^((\d)(\d(\d)))\1\2\3\4$/;
+var string = &quot;1231231233&quot;;
+console.log( regex.test(string) ); // true
+console.log( RegExp.$1 ); // 123
+console.log( RegExp.$2 ); // 1
+console.log( RegExp.$3 ); // 23
+console.log( RegExp.$4 ); // 3
+</code></pre><p>我们可以看看这个正则匹配模式：</p>
+<p>第一个字符是数字，比如说1，</p>
+<p>第二个字符是数字，比如说2，</p>
+<p>第三个字符是数字，比如说3，</p>
+<p>接下来的是\1，是第一个分组内容，那么看第一个开括号对应的分组是什么，是123，</p>
+<p>接下来的是\2，找到第2个开括号，对应的分组，匹配的内容是1，</p>
+<p>接下来的是\3，找到第3个开括号，对应的分组，匹配的内容是23，</p>
+<p>最后的是\4，找到第3个开括号，对应的分组，匹配的内容是3。</p>
+<p>这个问题，估计仔细看一下，就该明白了。</p>
+<p>3.2 \10表示什么呢？</p>
+<p>另外一个疑问可能是，即\10是表示第10个分组，还是\1和0呢？答案是前者，虽然一个正则里出现\10比较罕见。测试如下：</p>
+<pre><code>var regex = /(1)(2)(3)(4)(5)(6)(7)(8)(9)(#) \10+/;
+var string = &quot;123456789# ######&quot;
+console.log( regex.test(string) );
+</code></pre><p>3.3 引用不存在的分组会怎样？</p>
+<p>因为反向引用，是引用前面的分组，但我们在正则里引用了不存在的分组时，此时正则不会报错，只是匹配反向引用的字符本身。例如\2，就匹配”\2”。注意”\2”表示对2进行了转意。</p>
+<pre><code>var regex = /\1\2\3\4\5\6\7\8\9/;
+console.log( regex.test(&quot;\1\2\3\4\5\6\7\8\9&quot;) ); //true
+</code></pre><ol start="4">
+<li>非捕获分组</li>
+</ol>
+<p>之前文中出现的分组，都会捕获它们匹配到的数据，以便后续引用，因此也称他们是捕获型分组。</p>
+<p>如果只想要括号最原始的功能，但不会引用它，即，既不在API里引用，也不在正则里反向引用。此时可以使用非捕获分组(?:p)，例如本文第一个例子可以修改为：</p>
+<pre><code>var regex = /(?:ab)+/g;
+var string = &quot;ababa abbb ababab&quot;;
+console.log( string.match(regex) ); // [&quot;abab&quot;, &quot;ab&quot;, &quot;ababab&quot;]
+</code></pre><ol start="5">
+<li>相关案例</li>
+</ol>
+<p>至此括号的作用已经讲完了，总结一句话，就是提供了可供我们使用的分组，如何用就看我们的了。</p>
+<p>5.1 字符串trim方法模拟</p>
+<p>trim方法是去掉字符串的开头和结尾的空白符。有两种思路去做。</p>
+<p>第一种，匹配到开头和结尾的空白符，然后替换成空字符。如：</p>
+<pre><code>function trim(str) {
+    return str.replace(/^\s+|\s+$/g, &apos;&apos;);
+}
+console.log( trim(&quot;  foobar   &quot;) ); // &quot;foobar&quot;
+</code></pre><p>第二种，匹配整个字符串，然后用引用来提取出相应的数据：</p>
+<pre><code>function trim(str) {
+    return str.replace(/^\s*(.*?)\s*$/g, &quot;$1&quot;);
+}
+console.log( trim(&quot;  foobar   &quot;) ); // &quot;foobar&quot;
+</code></pre><p>这里使用了惰性匹配*?，不然也会匹配最后一个空格之前的所有空格的。</p>
+<p>当然，前者效率高。</p>
+<p>5.2 将每个单词的首字母转换为大写</p>
+<pre><code>function titleize(str) {
+    return str.toLowerCase().replace(/(?:^|\s)\w/g, function(c) {
+        return c.toUpperCase();
+    });
+}
+console.log( titleize(&apos;my name is epeli&apos;) ); // &quot;My Name Is Epeli&quot;
+</code></pre><p>思路是找到每个单词的首字母，当然这里不使用非捕获匹配也是可以的。</p>
+<p>5.3 驼峰化</p>
+<pre><code>function camelize(str) {
+    return str.replace(/[-_\s]+(.)?/g, function(match, c) {
+        return c ? c.toUpperCase() : &apos;&apos;;
+    });
+}
+console.log( camelize(&apos;-moz-transform&apos;) ); // MozTransform
+</code></pre><p>首字母不会转化为大写的。其中分组(.)表示首字母，单词的界定，前面的字符可以是多个连字符、下划线以及空白符。正则后面的?的目的，是为了应对str尾部的字符可能不是单词字符，比如str是’-moz-transform ‘。</p>
+<p>5.4 中划线化</p>
+<pre><code>unction dasherize(str) {
+    return str.replace(/([A-Z])/g, &apos;-$1&apos;).replace(/[-_\s]+/g, &apos;-&apos;).toLowerCase();
+}
+console.log( dasherize(&apos;MozTransform&apos;) ); // -moz-transform
+</code></pre><p>驼峰化的逆过程。</p>
+<p>5.5 html转义和反转义</p>
+<pre><code>// 将HTML特殊字符转换成等值的实体
+function escapeHTML(str) {
+    var escapeChars = {
+      &apos;¢&apos; : &apos;cent&apos;,
+      &apos;£&apos; : &apos;pound&apos;,
+      &apos;¥&apos; : &apos;yen&apos;,
+      &apos;€&apos;: &apos;euro&apos;,
+      &apos;©&apos; :&apos;copy&apos;,
+      &apos;®&apos; : &apos;reg&apos;,
+      &apos;&lt;&apos; : &apos;lt&apos;,
+      &apos;&gt;&apos; : &apos;gt&apos;,
+      &apos;&quot;&apos; : &apos;quot&apos;,
+      &apos;&amp;&apos; : &apos;amp&apos;,
+      &apos;\&apos;&apos; : &apos;#39&apos;
+    };
+    return str.replace(new RegExp(&apos;[&apos; + Object.keys(escapeChars).join(&apos;&apos;) +&apos;]&apos;, &apos;g&apos;), function(match) {
+        return &apos;&amp;&apos; + escapeChars[match] + &apos;;&apos;;
+    });
+}
+console.log( escapeHTML(&apos;&lt;div&gt;Blah blah blah&lt;/div&gt;&apos;) );
+// =&gt; &amp;lt;div&amp;gt;Blah blah blah&amp;lt;/div&amp;gt;
+</code></pre><p>其中使用了用构造函数生成的正则，然后替换相应的格式就行了，这个跟本文没多大关系。</p>
+<p>倒是它的逆过程，使用了括号，以便提供引用，也很简单，如下：</p>
+<pre><code>// 实体字符转换为等值的HTML。
+function unescapeHTML(str) {
+    var htmlEntities = {
+      nbsp: &apos; &apos;,
+      cent: &apos;¢&apos;,
+      pound: &apos;£&apos;,
+      yen: &apos;¥&apos;,
+      euro: &apos;€&apos;,
+      copy: &apos;©&apos;,
+      reg: &apos;®&apos;,
+      lt: &apos;&lt;&apos;,
+      gt: &apos;&gt;&apos;,
+      quot: &apos;&quot;&apos;,
+      amp: &apos;&amp;&apos;,
+      apos: &apos;\&apos;&apos;
+    };
+    return str.replace(/\&amp;([^;]+);/g, function(match, key) {
+        if (key in htmlEntities) {
+            return htmlEntities[key];
+        }
+        return match;
+    });
+}
+console.log( unescapeHTML(&apos;&amp;lt;div&amp;gt;Blah blah blah&amp;lt;/div&amp;gt;&apos;) );
+// =&gt; &lt;div&gt;Blah blah blah&lt;/div&gt;
+</code></pre><p>通过key获取相应的分组引用，然后作为对象的键。</p>
+<p>5.6 匹配成对标签</p>
+<p>要求匹配：</p>
+<pre><code>&lt;title&gt;regular expression&lt;/title&gt;
+
+&lt;p&gt;laoyao bye bye&lt;/p&gt;
+</code></pre><p>不匹配：</p>
+<pre><code>&lt;title&gt;wrong!&lt;/p&gt;
+</code></pre><p>匹配一个开标签，可以使用正则&lt;[^&gt;]+&gt;，</p>
+<p>匹配一个闭标签，可以使用&lt;\/[^&gt;]+&gt;，</p>
+<p>但是要求匹配成对标签，那就需要使用反向引用，如：</p>
+<pre><code>var regex = /&lt;([^&gt;]+)&gt;[\d\D]*&lt;\/\1&gt;/;
+var string1 = &quot;&lt;title&gt;regular expression&lt;/title&gt;&quot;;
+var string2 = &quot;&lt;p&gt;laoyao bye bye&lt;/p&gt;&quot;;
+var string3 = &quot;&lt;title&gt;wrong!&lt;/p&gt;&quot;;
+console.log( regex.test(string1) ); // true
+console.log( regex.test(string2) ); // true
+console.log( regex.test(string3) ); // false
+</code></pre><p>其中开标签&lt;[^&gt;]+&gt;改成&lt;([^&gt;]+)&gt;，使用括号的目的是为了后面使用反向引用，而提供分组。闭标签使用了反向引用，&lt;\/\1&gt;。</p>
+<p>另外[\d\D]的意思是，这个字符是数字或者不是数字，因此，也就是匹配任意字符的意思。</p>
+<p>正则表达式中(括号) [方括号] {大括号}的区别</p>
+<ul>
+<li>括号() ： 括号是多个匹配，它把括号内的当做一组来处理，限制一些多选的范围，比如上面的需求只能是com cn net结尾的用括号就是最好的选择。<br>括号能提取字符串，如(com|cn|net)就可以限制，只能是com或cn或net。<br>括号将括号里面的内容作为一组，这就是与[]不同的地方。</li>
+<li>方括号[]： 方括号是单个匹配，如[abc]他限制的不是abc连续出现，而是只能是其中一个，这样写那么规则就是找到这个位置时只能是a或是b或是c；<br>方括号是正则表达式中最常用的，常用的用法有：[a-zA-Z0-9]匹配所有英文字母和数字，a-zA-Z0-9匹配所有非英文字母和数字。</li>
+<li>大括号{}： 大括号的用法很简单，就是匹配次数，它需要和其他有意义的正则表达式一起使用。<br>比如[a-c]{2}意思就是匹配a-c之间的一个字母出现且只出现两次；<br>比如(com){1}意思就是com必须出现一次<br>比如\W{1,3}意思就是非字母数字最少出现一次最多出现3次。</li>
+</ul>
+<p>贪婪与非贪婪模式</p>
+<p>概述</p>
+<p>贪婪与非贪婪模式影响的是被量词修饰的子表达式的匹配行为，贪婪模式在整个表达式匹配成功的前提下，尽可能多的匹配，而非贪婪模式在整个表达式匹配成功的前提下，尽可能少的匹配。非贪婪模式只被部分NFA引擎所支持。 </p>
+<p>属于贪婪模式的量词，也叫做匹配优先量词，包括：  </p>
+<p>{m,n}、{m,}、?、*和+。    </p>
+<p>在一些使用NFA引擎的语言中，在匹配优先量词后加上“?”，即变成属于非贪婪模式的量词，也叫做忽略优先量词，包括：    </p>
+<p>{m,n}?、{m,}?、??、*?和+?。 </p>
+<p>从正则语法的角度来讲，被匹配优先量词修饰的子表达式使用的就是贪婪模式，如“(Expression)+”；被忽略优先量词修饰的子表达式使用的就是非贪婪模式，如“(Expression)+?”。 </p>
+<p>对于贪婪模式，各种文档的叫法基本一致，但是对于非贪婪模式，有的叫懒惰模式或惰性模式，有的叫勉强模式，其实叫什么无所谓，只要掌握原理和用法，能够运用自如也就是了。个人习惯使用贪婪与非贪婪的叫法</p>
+<p>这两种模式如下图所示：</p>
+<p>  贪婪        非贪婪        意　　义（X为表达式）<br>  X?        X??        匹配 X 零次或一次<br>  X<em>        X</em>?        匹配 X 零次或多次<br>  X+        X+?        匹配 X 一次或多次<br>  X{n,}     X{n,}?     匹配 X 至少 n 次<br>  X{n,m}    X{n,m}?    匹配 X 至少 n 次，但不多于 m 次</p>
+<p>看下一个例子，假定要分析的字符串是xfooxxxxxxfoo</p>
+<ul>
+<li>贪婪模式:<br>最大匹配方式。模式分为子模式p1(.*)和子模式p2(foo)两个部分. 其中p1中的量词匹配方式使用默认方式(贪婪型)。 匹配开始时,吃入所有字符xfooxxxxxx去匹配子模式p1。匹配成功,但这样以来就没有了字符串去匹配子模式p2。本轮匹配失败；第二轮：减少p1部分的匹配量，吐出最后一个字符, 把字符串分割成xfooxxxxxxfo和o两个子字符串s1和s2。 s1匹配p1, 但s2不匹配p2。本轮匹配失败；第三轮，再次减少p1部分匹配量，吐出两个字符, 字符串被分割成xfooxxxxxxfo和oo两部分。结果同上。第四轮，再次减少p1匹配量, 字符串分割成xfooxxxxxx和foo两个部分, 这次s1/s2分别和p1/p2匹配。停止尝试,返回匹配成功。<pre><code>var regex = /.*foo/;
+var string = &quot;xfooxxxxxxfoo&quot;;
+console.log( string.match(regex) ); //xfooxxxxxxfoo
+</code></pre></li>
+<li>非贪婪模式:<br>最小匹配方式。第一次尝试匹配, p1由于是0或任意次，因此被忽略，用字符串去匹配p2,失败；第二次，读入第一个字符x, 尝试和p1匹配, 匹配成功; 字符串剩余部分fooxxxxxxfoo中前三个字符和p2也是匹配的. 因此, 停止尝试, 返回匹配成功。在这种模式下，如果对剩余字符串继续去寻找和模式相匹配的子字符串，还会找到字符串末尾的另一个xfoo，而在贪婪模式下，由于第一次匹配成功的子串就已经是所有字符，因此不存在第二个匹配子串。<pre><code>var regex = /.*?foo/;
+var string = &quot;xfooxxxxxxfoo&quot;;
+console.log( string.match(regex) ); //xfoo
+</code></pre></li>
+</ul>
+<p>JavaScript RegExp 对象</p>
+<p>正则表达式是描述字符模式的对象。</p>
+<p>正则表达式用于对字符串模式匹配及检索替换，是对字符串执行模式匹配的强大工具。</p>
+<p>语法</p>
+<pre><code>var patt=new RegExp(pattern,modifiers);
+
+或者更简单的方式:
+
+var patt=/pattern/modifiers;
+</code></pre><ul>
+<li>pattern（模式） 描述了表达式的模式</li>
+<li>modifiers(修饰符) 用于指定全局匹配、区分大小写的匹配和多行匹配</li>
+</ul>
+<p>注意：当使用构造函数创造正则对象时，需要常规的字符转义规则（在前面加反斜杠 \）。比如，以下是等价的：</p>
+<pre><code>var re = new RegExp(&quot;\\w+&quot;);
+var re = /\w+/;
+</code></pre><p>例如：</p>
+<pre><code>var re = new RegExp(&quot;\\w+&quot;);
+re.test(&quot;abc&quot;);//true
+
+/\w+\.test(&quot;abc&quot;);//true
+</code></pre><p>修饰符  </p>
+<p>修饰符用于执行区分大小写和全局匹配:</p>
+<p>  修饰符     描述<br>  i       执行对大小写不敏感的匹配。<br>  g       执行全局匹配（查找所有匹配而非在找到第一个匹配后停止）。<br>  m       执行多行匹配。                     </p>
+<p>exec()</p>
+<p>exec() 方法用于检索字符串中的正则表达式的匹配。</p>
+<p>如果字符串中有匹配的值返回该匹配值，否则返回 null。</p>
+<p>语法：  </p>
+<p>RegExpObject.exec(string)</p>
+<p>例子:   </p>
+<pre><code>var str=&quot;Hello world!&quot;;
+//查找&quot;Hello&quot;
+var patt=/Hello/g;
+console.log(patt.exec(str)); //Hello
+</code></pre><p>test()</p>
+<p>test() 方法用于检测一个字符串是否匹配某个模式.</p>
+<p>如果字符串中有匹配的值返回 true ，否则返回 false。</p>
+<p>语法：  </p>
+<p>RegExpObject.test(string)</p>
+<p>例子:   </p>
+<pre><code>var str=&quot;Hello world!&quot;;
+//查找&quot;Hello&quot;
+var patt=/Hello/g;
+console.log(patt.test(str)); //true
+</code></pre><p>match()</p>
+<p>找到一个或多个正则表达式的匹配。</p>
+<p>语法：  </p>
+<p>string.match(regexp)</p>
+<p>例子:   </p>
+<pre><code>有修饰符g
+var str=&quot;The rain in SPAIN stays mainly in the plain&quot;; 
+console.log(str.match(/ain/g));//&quot;ain&quot;, &quot;ain&quot;, &quot;ain&quot;
+
+没有修饰符g
+var str=&quot;The rain in SPAIN stays mainly in the plain&quot;; 
+console.log(str.match(/ain/));//&quot;ain&quot;
+</code></pre><p>注意： match() 方法将检索字符串 String Object，以找到一个或多个与 regexp 匹配的文本。这个方法的行为在很大程度上有赖于 regexp 是否具有标志 g。如果 regexp 没有标志 g，那么 match() 方法就只能在 stringObject 中执行一次匹配。如果没有找到任何匹配的文本， match() 将返回 null。否则，它将返回一个数组，其中存放了与它找到的匹配文本有关的信息。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/02/27/vue+webpack环境搭建/" rel="next" title="test">
+                <i class="fa fa-chevron-left"></i> test
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/06/13/test/" rel="prev" title="test">
+                test <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Candytse</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#javascript基础回顾–正则表达式"><span class="nav-number">1.</span> <span class="nav-text">javascript基础回顾–正则表达式</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Candytse</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
